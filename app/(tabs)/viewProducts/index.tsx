@@ -19,7 +19,7 @@ export default function ViewProducts() {
   }, []);
 
   return (
-    <View>
+    <View style={styles.container}>
       {products.map((item) => (
         <View style={{ borderWidth: 1, borderColor: "black", marginTop: 10 }}>
           <Text key={item._id}>{item.productName}</Text>
@@ -30,3 +30,9 @@ export default function ViewProducts() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
