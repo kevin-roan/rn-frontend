@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, ScrollView, Text, View } from "react-native";
 import { useEffect, useState } from "react";
 
 export default function ViewProducts() {
@@ -19,20 +19,30 @@ export default function ViewProducts() {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       {products.map((item) => (
-        <View style={{ borderWidth: 1, borderColor: "black", marginTop: 10 }}>
-          <Text key={item._id}>{item.productName}</Text>
-          <Text key={item._id}>{item.cost}</Text>
-          <Text key={item._id}>{item.availableQuantity}</Text>
+        <View style={styles.card}>
+          <Text key={item._id}>Product Name: {item.productName}</Text>
+          <Text key={item._id}>Product Cost: {item.cost}</Text>
+          <Text key={item._id}>
+            Available Quantity:{item.availableQuantity}
+          </Text>
         </View>
       ))}
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#f4f4f5",
+  },
+  card: {
+    borderColor: "#eab308",
+    padding: 10,
+    borderWidth: 1,
+    borderRadius: 10,
+    margin: 10,
   },
 });

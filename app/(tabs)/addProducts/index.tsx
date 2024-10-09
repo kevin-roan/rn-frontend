@@ -1,4 +1,11 @@
-import { View, Text, TextInput, Button } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 import { useState, useEffect } from "react";
 import RNPickerSelect from "react-native-picker-select";
 
@@ -80,7 +87,6 @@ const AddProducts = () => {
 
   return (
     <View>
-      <Text>Add Products</Text>
       <RNPickerSelect
         onValueChange={(value) => {
           const selectedProduct = prevProducts.find(
@@ -99,23 +105,69 @@ const AddProducts = () => {
         }))}
       />
       <TextInput
+        style={styles.input}
         placeholder="Quantity"
+        inputMode="numeric"
         value={productData.quantity}
         onChangeText={(text) => {
           handleInputChange("quantity", text);
         }}
       />
       <TextInput
+        style={styles.input}
         inputMode="numeric"
         placeholder="Phone Number"
         value={productData.phoneNumber}
         onChangeText={(text) => handleInputChange("phoneNumber", text)}
       />
-      {prodTotal ? <Text>{prodTotal}</Text> : <Text>0</Text>}
-      <Button title="calculateTotal" onPress={() => calculateTotal()} />
-      <Button title="Submit" onPress={handleSubmit} />
+      {prodTotal ? (
+        <Text style={styles.total}> Product Total:{prodTotal}</Text>
+      ) : (
+        <Text style={styles.total}>Product Total:0</Text>
+      )}
+      <TouchableOpacity
+        onPress={() => calculateTotal()}
+        style={styles.calculateTotal}
+      >
+        <Text style={{ fontSize: 18, color: "white" }}>Calculate Total</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handleSubmit} style={styles.submit}>
+        <Text style={{ fontSize: 18, color: "white" }}>Submit</Text>
+      </TouchableOpacity>
     </View>
   );
 };
 
 export default AddProducts;
+
+const styles = StyleSheet.create({
+  calculateTotal: {
+    padding: 10,
+    margin: 10,
+    borderRadius: 10,
+    backgroundColor: "#65a30d",
+    width: 200,
+  },
+  submit: {
+    padding: 10,
+    margin: 10,
+    borderRadius: 10,
+    backgroundColor: "#eab308",
+    width: 200,
+  },
+  input: {
+    padding: 10,
+    borderWidth: 1,
+    margin: 10,
+    borderRadius: 10,
+    borderColor: "#16a34a",
+  },
+  total: {
+    fontSize: 20,
+    margin: 10,
+  },
+  select: {
+    margin: 10,
+    borderWidth: 1,
+  },
+});
